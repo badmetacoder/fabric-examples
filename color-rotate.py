@@ -1,13 +1,18 @@
-from fabric.api import run
 from fabric.api import local
-from fabric.api import env
 from fabric.colors import blue, cyan, green, magenta, red, white, yellow
 
 import sys
 
+"""color-rotate.py -- Rotates colors turning any string into a rainbow
+explosion
+"""
+
+
 def color_rotate(s):
-    """Print every character in the given string in a different color.
+
+    """return the ANSI color-rotated version of the given string.
     """
+
     n = len(s)
     m = 0
     while (m < n):
@@ -27,4 +32,12 @@ def color_rotate(s):
             sys.stdout.write(yellow(s[m:m+1]))
         m += 1
 
-color_rotate('abcdefghijklmnopqrstuvewkfphwevnror')
+
+def color_top():
+
+    """color the output of top -b -n 1 | head
+    """
+
+    local_output = local('top -b -n 1 | head', capture=True)
+    color_rotate(local_output)
+    print
